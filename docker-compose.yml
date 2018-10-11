@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+    backend:
+        build: .
+        command: python src/manage.py runserver 0.0.0.0:8000
+        ports:
+            - "8000:8000"
+        volumes: 
+            - .:/app
+        links:
+            - database
+
+    database:
+        image: postgres
+        environment:
+            - POSTGRES_DB=database
+            - POSTGRES_USER=setcain
+            - POSTGRES_PASSWORD=secret
+            - PGDATA=/var/lib/postgres/data/pgdata
+        volumes:
+            - db_data:/var/lib/postgres/data/pgdata
+
+volumes:
+    db_data:
