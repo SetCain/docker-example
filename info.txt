@@ -1,26 +1,31 @@
-Para correr el docker-compose.yml:
+Para crear la imagen (dirname_servicename):
 docker-compose build
 
+
 -----
----para entrar en el contenedor como root:
-docker-compose run --rm --service-ports backend bash
-#
-Este comando levantara el proceso de la base de datos
-Desde dentro podemos crear el proyecto: django-admin startproject [name]
-Cambiar el nombre del directorio del proyecto a src
-crear una aplicacion principal: python manage.py startapp [name]
-configurar el proyecto como queramos: project_name/settings.py
-Si se necesita cambiar el dueño de los directorios/archivos:
-sudo chown -R $USER:$USER .
-#
 
 --- para entrar en el container como usuario app:
 docker-compose run --rm --service-ports backend - bash
-# los directorios pertenesen a $USER (el nombre del volumen 'app') y no a root
+#
+los directorios en workdir pertenesen a 'app' y no a root
+Este comando levantara el proceso de la base de datos
+Desde dentro crear el proyecto: django-admin startproject [name]
+Cambiar el nombre del directorio del proyecto a src
+crear una aplicacion principal: python manage.py startapp [name]
+configurar el proyecto como queramos: project_name/settings.py
+#
+
+--- para entrar en el contenedor como root:
+docker-compose run --rm --service-ports backend bash
+--- se necesita cambiar el dueño de los directorios en workdir local:
+sudo chown -R $USER:$USER .
 
 --- significados de banderas:
 --rm borrar el contenedor al terminar
 --service-ports abrir los puertos entre host y container
+
+
+-----
 
 --- para correr el servidor:
 docker-compose run --rm --service-ports backend
@@ -28,6 +33,7 @@ docker-compose run --rm --service-ports backend
 
 
 -----
+
 --- para levantar la base de datos:
 docker-compose up database
 # con la bandera -d, (detach) es para correr en back
@@ -39,11 +45,11 @@ docker-compose logs database
 docker-compose exec database psql -U [username] template1
 
 --- significado de comandos:
-- exec ejecutar dentro del contenedor en backdoor
+- exec ejecutar comandos dentro del contenedor, aunque este corriendo
 - (database) nombre del servicio
 - psql comando de postgres
 -U user (el usuario por default es postgres)
-- template1 nombre en el prompt
+- template1 nombre en el prompt para entrar
 
 --- para apagar los contenedores:
 docker-compose down database
