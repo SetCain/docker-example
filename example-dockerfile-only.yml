@@ -1,0 +1,30 @@
+FROM python:3.6.3-slime
+
+# meta-data
+LABEL maintainer="name <name@mail.com>"
+      descriptoin="description here"
+
+# set the working directory to /app into container
+WORKDIR /app
+
+# copy the current directory contents into the container at /app
+COPY . /app
+
+# install the required libraries
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# set /app directory the volume into the container
+VOLUME ["/app"]
+
+# make port 8000 available outside the container
+EXPOSE 8000
+
+
+# para crear la imagen: docker build -t [image_name] .
+
+# para correr la imagen y entrar en ella (crear proyecto)
+# docker run --rm -it -v $USER:/app -p 8000:8000 [id_image] bash
+
+# para correr la imagen y continuar desarrollando
+# docker run --rm -v $USER:/app -p 8000:8000 [image_name] [command]
