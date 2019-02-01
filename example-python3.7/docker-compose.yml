@@ -2,7 +2,7 @@ version: '3'
 
 services:
 
-    backend:
+    django:
         build: .
         command: python /app/src/manage.py runserver 0.0.0.0:8000
         ports:
@@ -12,7 +12,7 @@ services:
         links:
             - database
 
-    database:
+    postgres:
         image: postgres
         environment:
             - POSTGRES_DB=mydb

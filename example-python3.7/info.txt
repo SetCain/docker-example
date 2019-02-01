@@ -1,7 +1,4 @@
 Correr los comandos iguales a la imagen de vevende/python3
 
-Se tiene que cambiar el propietario del proyecto de django pues es root
+Se tiene que cambiar el propietario del proyecto, pues por default es root
 sudo chown -R $USER:$USER .
-
-Cada que se corra un comando:
-python /app/src/manage.py runserver
