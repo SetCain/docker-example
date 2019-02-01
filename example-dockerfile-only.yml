@@ -1,0 +1,24 @@
+FROM python:3.6.3-slime
+
+LABEL maintainer="name <name@mail.com>"
+      descriptoin="description here"
+
+WORKDIR /app
+
+COPY . /app
+
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+VOLUME ["/app"]
+
+EXPOSE 8000
+
+
+# para crear la imagen: docker build -t [image_name] .
+
+# para correr la imagen y entrar en ella (crear proyecto)
+# docker run --rm -it -v $USER:/app -p 8000:8000 [id_image] bash
+
+# para correr la imagen y continuar desarrollando
+# docker run --rm -v $USER:/app -p 8000:8000 [image_name] [command]
