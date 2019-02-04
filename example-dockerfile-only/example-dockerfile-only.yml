@@ -44,6 +44,10 @@ CMD ["manage.py", "runserver", "0.0.0.0:8000"]
 #
 # para pasar parametros de python por el ENTRYPOINT
 # docker run --rm -v $(pwd):/app [image_name] manage.py startapp [app_name]
+#
+# para especificar el directorio donde queremos que corra el comando
+# docker run --rm -v $(pwd):/app -p 8000:8000 -w /app/src [image_name] \
+# manage.py check
 # 
 # todos los dir y files son de root, cambiar los permisos
 # sudo chown -R $USER:$USER .
