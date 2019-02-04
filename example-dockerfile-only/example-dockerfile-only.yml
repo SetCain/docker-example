@@ -20,12 +20,32 @@ VOLUME ["/app"]
 # make port 8000 available outside the container
 EXPOSE 8000
 
+# indicates the principal comand of the image
+ENTRYPOINT ["python"]
+
+# principal parameters for ENTRYPOINT
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+
 
 # para crear la imagen: docker build -t [image_name] .
 # -t es para darle un nombre a la imagen que vamos a crear
-
+# se puede hacer build las veces que sea necesario al modificar el Dockerfile
+#
 # para correr la imagen y entrar en ella (crear proyecto)
-# docker run --rm -it -v $USER:/app -p 8000:8000 [id_image] bash
-
-# para correr la imagen y continuar desarrollando
-# docker run --rm -v $USER:/app -p 8000:8000 [image_name] [command]
+# esto se hace antes de incluir el ENTRYPOINT
+# docker run --rm -it -v $(pwd):/app [id_image] bash
+# --rm remover el contenedor que se crea
+# -it terminal interactiva dentro de la imagen
+# -v mapear volumen host:workdir
+#
+# para correr la imagen (por defecto corre el servidor de desarrollo)
+# docker run --rm -v $(pwd):/app -p 8000:8000 [image_name]
+# -p mapear puertos host:imagen
+#
+# para pasar parametros de python por el ENTRYPOINT
+# docker run --rm -v $(pwd):/app [image_name] manage.py startapp [app_name]
+# 
+# todos los dir y files son de root, cambiar los permisos
+# sudo chown -R $USER:$USER .
+# -R recursivamente
+# $USER:$USER usuario:grupo
