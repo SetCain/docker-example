@@ -25,7 +25,7 @@ EXPOSE 8000
 # -t es para darle un nombre a la imagen que vamos a crear
 
 # para correr la imagen y entrar en ella (crear proyecto)
-# docker run --rm -it -v $USER:/app -p 8000:8000 [id_image] bash
+# docker run --rm -it -v $(pwd):/app -p 8000:8000 [id_image] bash
 
 # para correr la imagen y continuar desarrollando
-# docker run --rm -v $USER:/app -p 8000:8000 [image_name] [command]
+# docker run --rm -v $(pwd):/app -p 8000:8000 [image_name] [command]
