@@ -12,6 +12,14 @@ docker-compose run --rm backend - bash
 2.- Cambiar el nombre del directorio del proyecto a src
 3.- Salir del contenedor
 4.- fuera, configurar el proyecto para postgres: project_name/settings.py
+
+Los siguientes datos estan en el docker-compose.yml:
+'ENGINE': 'django.db.backends.postgresql',
+'NAME': 'nombre de la db',
+'USER': 'nombre del usuario',
+'PASSWORD': 'contraseña del usuario',
+'HOST': 'nombre del contenedor de la db',
+'PORT': '5432',  # puerto por defecto de postgres
 #
 
 --- para entrar en el contenedor como root:
